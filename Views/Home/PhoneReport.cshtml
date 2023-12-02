@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html ng-app="phoneApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Reservation Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+    <script src="PhoneNumberScript.js"></script>
+</head>
+<body ng-controller="PhoneController">
+    <div class="container">
+        <h1>Phone Report Page</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="searchText" placeholder="Search by Number"><br>
+            
+            <button class="btn btn-primary" ng-click="SearchGrid()">Filter</button>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Device</th>
+                    <th>Number of Phone Numbers Reserved</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="device in devices">
+                    <td>{{ device.Name }}</td>
+                    <td>{{ getPhoneNumberCount(device) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
