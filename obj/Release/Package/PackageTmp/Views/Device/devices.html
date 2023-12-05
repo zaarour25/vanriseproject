@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html ng-app="devApp">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="MyApp/app.js"></script>
+    <style>
+        #search-box {
+            width: 200px;
+            height: 35px;
+            margin-bottom: 25px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="DeviceController">
+        <input id="search-box" type="text" ng-model="searchText" placeholder="Search">
+        <button class="btn btn-primary" ng-click="SearchGrid()">Search</button>
+        <button class="btn btn-primary" ng-click="openModal()">Add</button>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="device in searchedDevices">
+                    <td>{{ device.id }}</td>
+                    <td>{{ device.name }}</td>
+                    <td><button class="btn btn-default" ng-click="openModal(device)">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script type="text/ng-template" id="modal.html">
+            <div class="modal-header">
+                <h3 class="modal-title">{{ modalTitle }}</h3>
+            </div>
+            <div class="modal-body">
+                <form name="deviceForm">
+                    <div class="form-group" style="display: none;">
+                        <label>ID:</label>
+                        <input type="text" class="form-control" ng-model="modalDevice.id" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" ng-model="modalDevice.name" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="saveDevice()" ng-disabled="deviceForm.$invalid">Save</button>
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+</body>
+</html>

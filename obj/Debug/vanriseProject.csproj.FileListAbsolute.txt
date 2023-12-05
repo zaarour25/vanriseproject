@@ -83,3 +83,7 @@ C:\Users\Admin\Desktop\VisualStudioProjs\vanriseProject\obj\Debug\vanriseProject
 C:\Users\Admin\Desktop\VisualStudioProjs\vanriseProject\obj\Debug\vanriseProject.csproj.CopyComplete
 C:\Users\Admin\Desktop\VisualStudioProjs\vanriseProject\obj\Debug\vanriseProject.dll
 C:\Users\Admin\Desktop\VisualStudioProjs\vanriseProject\obj\Debug\vanriseProject.pdb
+C:\Users\Admin\Desktop\VisualStudioProjs\vanriseProject\bin\EntityFramework.dll
+C:\Users\Admin\Desktop\VisualStudioProjs\vanriseProject\bin\EntityFramework.SqlServer.dll
+C:\Users\Admin\Desktop\VisualStudioProjs\vanriseProject\bin\EntityFramework.xml
+C:\Users\Admin\Desktop\VisualStudioProjs\vanriseProject\bin\EntityFramework.SqlServer.xml

@@ -10,7 +10,7 @@ namespace vanriseProject.Controllers
     [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
-        private  string connectionString = "Data Source=(local);Initial Catalog=databaseVan;Integrated Security=True;";
+        private  string connectionString = "Server=tcp:ahmad-sqlserver.database.windows.net,1433;Initial Catalog=ahmad-database;Persist Security Info=False;User ID=Zaarour25;Password=Zaarour@azure;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         [HttpGet]
         [Route("getusers")]

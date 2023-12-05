@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html ng-app="clientApp">
+<head>
+    <title>Client Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/MyApp/ClientScript.js"></script>
+</head>
+<body ng-controller="ClientController">
+    <div class="container">
+        <h1>Client Page</h1>
+
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="searchText" placeholder="Search by name"><br>
+            <button class="btn btn-primary" ng-click="SearchGrid()">Filter</button>
+            <button class="btn btn-primary" ng-click="openModal()">Add Client</button>
+        </div>
+
+        <div class="alert alert-success" role="alert" ng-show="showSuccessMessage">
+            Device added successfully!
+        </div>
+
+        <div class="alert alert-danger" role="alert" ng-show="showErrorMessage">
+            Error adding device. Please try again.
+        </div>
+        <!-- Client Table -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Birth Date</th>
+                    <th>Action</th>
+                    <th>Edit</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="client in clients | filter: { Name: nameFilter, Type: typeFilter }">
+                    <td>{{ client.ID }}</td>
+                    <td>{{ client.Name }}</td>
+                    <td>{{ getClientTypeText(client.Type.toString()) }}</td> <!-- Convert the integer to string before passing it to the function -->
+                    <td>{{ client.Birthdate }}</td>
+                    <td>
+                        <button class="btn btn-success" ng-click="openPhoneReservationModal(client)">Reserve</button>
+                        <button class="btn btn-danger" ng-click="openUnreserveConfirmationModal(client)">Unreserve</button>
+                    </td>
+
+
+                    <td>
+                        <button class="btn btn-primary" ng-click="openModal(client)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <!-- Modal template -->
+        <script type="text/ng-template" id="Clientmodal.html">
+            <div class="modal-header">
+                <h3 class="modal-title">{{ modalTitle }}</h3>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <!-- Rest of the modal content remains unchanged -->
+                    <div class="form-group">
+                        <label for="clientName">Name:</label>
+                        <input type="text" id="clientName" class="form-control" ng-model="modalClient.Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientType">Type:</label>
+                        <select id="clientType" class="form-control" ng-model="modalClient.Type">
+                            <option value="Individual">Individual</option>
+                            <option value="Organization">Organization</option>
+                        </select>
+                    </div>
+                    <div ng-if="modalClient.Type === 'Individual'" class="form-group">
+                        <label for="birthdate">Birth Date:</label>
+                        <input type="date" id="birthdate" class="form-control" ng-model="modalClient.Birthdate">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="saveClient()" ng-disabled="!modalClient.Name || !modalClient.Type || (modalClient.Type === 'Individual' && !modalClient.Birthdate)">Save</button>
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+
+        <!-- Phone Reservation Modal -->
+        <!-- Phone Reservation Modal -->
+        <script type="text/ng-template" id="PhoneReservationModal.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Phone Reservation</h3>
+            </div>
+            <div class="modal-body">
+                <label for="phoneNumber">Select a Phone Number:</label>
+                <select ng-model="selectedPhoneNumber" ng-options="phone.Number for phone in availablePhoneNumbers" class="form-control">
+                    <option value="">Select...</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="reservePhone()">Reserve</button>
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+
+        <!-- Unreserve Confirmation Modal -->
+        <script type="text/ng-template" id="UnreserveConfirmationModal.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Unreserve Phone Number</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to unreserve the phone number?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" ng-click="unreservePhone()">Confirm</button>
+                <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+
+
+
+    </div>
+</body>
+</html>

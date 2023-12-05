@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html ng-app="clientApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Report Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/MyApp/ClientScript.js"></script>
+</head>
+<body ng-controller="ClientController" ng-init="initializeCounts()">
+    <div class="container">
+        <h1>Client Report Page</h1>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Number of clients</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Individual</td>
+                    <td>{{ individualCount }}</td>
+                </tr>
+                <tr>
+                    <td>Organization</td>
+                    <td>{{ organizationCount }}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>{{ totalCount }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
